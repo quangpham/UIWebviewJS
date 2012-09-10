@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta name="viewport" content="width = 320">
+<script type="text/javascript" src="js/basejs/base.min.js"></script>
+<link rel='stylesheet' href='css/progress_bar.css'>
+<script>
+document.addEventListener('dom:loaded', function(event) {
+	// disable scroll
+	document.ontouchmove = function(event) {
+		event.preventDefault();
+	};
+}, true);
+
+var ExampleApp = {
+	template: new Template('											\
+		<p><strong>Congratulation!</strong> You\'ve completed					\
+			<span class="percent">#{percent}%</span> of this tutorial!</p>		\
+		<div class="meter animate">												\
+			<span style="width: #{percent}%"><span>								\
+		</div>																	\
+	'),
+	
+	setPercent: function(percent) {
+		$('#content')[0].innerHTML = this.template.parse({ percent: percent });
+	},
+    
+    test: function(arg) {
+        location.href = 'myApp://param='+arg;
+    }
+};
+
+</script>
+<style>
+span.percent {
+	color: #080;
+	font-family: arial, sans-serif;
+	font-size: 32px;
+}
+</style>
+</head>
+<body>
+<div id="content"></div>
+    <div><a href="#" onclick="ExampleApp.test(10);">Link</a>
+</div>
+</body>
+</html>
